@@ -16,14 +16,15 @@
             box-sizing: border-box;
             user-select: none;
         }
+        h2 {
+            margin-top: 60px;
+        }
         .news-line {
             display: flex;
             display: -webkit-box;
             display: -webkit-flex;
             display: -ms-flexbox;
-            margin-top: 120px;
             width: 100%;
-            height: 41px;
             overflow: hidden;
             background-color: #fff;
             border-top: 1px solid #f3f3f3;
@@ -31,33 +32,62 @@
             text-align: left;
             font-size: 0;
         }
-        .news-line > .line-title {
+        .news-line > .line-title-one {
             width: 68px;
-            line-height: 41px;
+            line-height: 40px;
             font-size: 14px;
             font-weight: 600;
             text-align: center;
         }
-        .news-line > .line-text {
+        .news-line > .line-title-two {
+            width: 68px;
+            line-height: 60px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .news-line > .line-text-one {
             flex: 1;
             -webkit-box-flex: 1;
             -webkit-flex: 1;
             -ms-flex: 1;
             flex-grow: 1;
-            height: 41px;
+            height: 40px; /* 这个高度即为行高，关系到滚动距离，可以根据自身修改 */
             font-size: 12px;
             color: #666;
         }
+        .news-line > .line-text-two {
+            flex: 1;
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex-grow: 1;
+            height: 60px; /* 这个高度即为行高，关系到滚动距离，可以根据自身修改 */
+            font-size: 14px;
+            color: #666;
+        }
 
-        #line-marquee {
+        .line-marquee {
             height: 100%;
             overflow: hidden;
         }
-        #line-marquee > li {
+
+        #marquee-one > li {
             list-style: none;
             display: block;
             width: 100%;
-            line-height: 41px;
+            line-height: 40px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        #marquee-two > li {
+            list-style: none;
+            display: block;
+            width: 100%;
+            line-height: 30px;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -66,14 +96,31 @@
 </head>
 <body>
 
+<h2>单条循环新闻</h2>
 <div class="news-line">
-    <div class="line-title">新闻头条</div>
-    <div class="line-text">
-        <ul id="line-marquee">
+    <div class="line-title-one">新闻头条</div>
+    <div class="line-text-one">
+        <ul class="line-marquee" id="marquee-one">
             <li>可以0元买奔驰宝马啦，机不可失时不再来1！</li>
             <li>可以0元买奔驰宝马啦，机不可失时不再来2！</li>
             <li>可以0元买奔驰宝马啦，机不可失时不再来3！</li>
-            <li>可以0元买奔驰宝马啦，机不可失时不再来1！</li>
+        </ul>
+    </div>
+</div>
+
+<h2>双条循环新闻</h2>
+<div class="news-line">
+    <div class="line-title-two">新闻头条</div>
+    <div class="line-text-two">
+        <ul class="line-marquee" id="marquee-two">
+            <li>
+                <p>可以0元买奔驰宝马啦，机不可失时不再来1！</p>
+                <p>可以0元买奔驰宝马啦，机不可失时不再来2！</p>
+            </li>
+            <li>
+                <p>可以0元买奔驰宝马啦，机不可失时不再来3！</p>
+                <p>可以0元买奔驰宝马啦，机不可失时不再来4！</p>
+            </li>
         </ul>
     </div>
 </div>
@@ -81,7 +128,8 @@
 <script src="./news-marquee.js"></script>
 <script type="text/javascript">
     window.onload = function () {
-        new newsMarquee('line-marquee');
+        new newsMarquee('#marquee-one');
+        new newsMarquee('#marquee-two');
     }
 </script>
 </body>

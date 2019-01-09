@@ -3,7 +3,7 @@
 * license: "MIT",
 * name: "newsMarquee.js",
 * github: "https://github.com/yangyuji/news-marquee",
-* version: "1.0.0"
+* version: "1.0.2"
 */
 
 (function (root, factory) {
@@ -17,24 +17,43 @@
 }(this, function () {
     'use strict'
 
-    function Marquee(id) {
-        var oMarquee = document.getElementById(id);
-        var iLineHeight = oMarquee.children[0].offsetHeight;
-        var iLineCount = 3;
+    function Marquee(el, opt) {
+        var _self = this;
+        this.oMarquee = typeof el == 'string' ? document.querySelector(el) : el;
+        if (!this.oMarquee) return;
+
+        this.iLineHeight = this.oMarquee.children[0].offsetHeight;
+        this.iLineCount = this.oMarquee.children.length;
+
+        this.options = {
+            speed: 10,  //滚动速度
+            pause: 3500 //停顿时间
+        }
+
+        for (var i in opt) {
+            this.options[i] = opt[i];
+        }
+
+        appendChild();
 
         function run() {
-            oMarquee.scrollTop += 1;
-            if(oMarquee.scrollTop >= iLineCount * iLineHeight) {
-                oMarquee.scrollTop = 0;
+            _self.oMarquee.scrollTop += 1;
+            if(_self.oMarquee.scrollTop >= _self.iLineCount * _self.iLineHeight) {
+                _self.oMarquee.scrollTop = 0;
             }
-            if(oMarquee.scrollTop % iLineHeight == 0) {
-                setTimeout(run, 3500);
+            if(_self.oMarquee.scrollTop % _self.iLineHeight === 0) {
+                setTimeout(run, _self.options.pause);
             } else {
-                setTimeout(run, 10);
+                setTimeout(run, _self.options.speed);
             }
         }
 
-        setTimeout(run, 3500);
+        function appendChild() {
+            var node = _self.oMarquee.children[0].cloneNode(true);
+            _self.oMarquee.appendChild(node);
+        }
+
+        setTimeout(run, _self.options.pause);
     }
 
     return Marquee;
