@@ -46,6 +46,13 @@
             font-weight: 600;
             text-align: center;
         }
+        .news-line > .line-title-three {
+            width: 90px;
+            line-height: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+        }
 
         .news-line > .line-text-one {
             flex: 1;
@@ -67,36 +74,46 @@
             font-size: 14px;
             color: #666;
         }
+        .news-line > .line-text-three {
+            flex: 1;
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex-grow: 1;
+            height: 30px; /* 这个高度即为行高，关系到滚动距离，可以根据自身修改 */
+            font-size: 14px;
+            color: #666;
+        }
 
         .line-marquee {
             height: 100%;
             overflow: hidden;
         }
-
-        #marquee-one > li {
+        .line-marquee > li {
             list-style: none;
             display: block;
             width: 100%;
-            line-height: 40px;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
         }
 
+        #marquee-one > li {
+            line-height: 40px;
+        }
+
         #marquee-two > li {
-            list-style: none;
-            display: block;
-            width: 100%;
             line-height: 30px;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+        }
+
+        #marquee-three > li {
+            line-height: 30px;
         }
     </style>
 </head>
 <body>
 
-<h2>单条循环新闻</h2>
+<h2>单条循环</h2>
 <div class="news-line">
     <div class="line-title-one">新闻头条</div>
     <div class="line-text-one">
@@ -108,7 +125,7 @@
     </div>
 </div>
 
-<h2>双条循环新闻</h2>
+<h2>双条循环</h2>
 <div class="news-line">
     <div class="line-title-two">新闻头条</div>
     <div class="line-text-two">
@@ -125,11 +142,27 @@
     </div>
 </div>
 
+<h2>不暂停循环</h2>
+<div class="news-line">
+    <div class="line-title-three">新闻头条</div>
+    <div class="line-text-three">
+        <ul class="line-marquee" id="marquee-three">
+            <li>可以0元买奔驰宝马啦，机不可失时不再来1！</li>
+            <li>可以0元买奔驰宝马啦，机不可失时不再来2！</li>
+            <li>可以0元买奔驰宝马啦，机不可失时不再来3！</li>
+        </ul>
+    </div>
+</div>
+
 <script src="./news-marquee.js"></script>
 <script type="text/javascript">
     window.onload = function () {
         new newsMarquee('#marquee-one');
         new newsMarquee('#marquee-two');
+        new newsMarquee('#marquee-three', {
+            successive: true,
+            speed: 50
+        });
     }
 </script>
 </body>

@@ -3,7 +3,7 @@
 * license: "MIT",
 * name: "newsMarquee.js",
 * github: "https://github.com/yangyuji/news-marquee",
-* version: "1.0.2"
+* version: "1.0.3"
 */
 
 (function (root, factory) {
@@ -26,6 +26,7 @@
         this.iLineCount = this.oMarquee.children.length;
 
         this.options = {
+            successive: false,  //是否连续
             speed: 10,  //滚动速度
             pause: 3500 //停顿时间
         }
@@ -41,10 +42,14 @@
             if(_self.oMarquee.scrollTop >= _self.iLineCount * _self.iLineHeight) {
                 _self.oMarquee.scrollTop = 0;
             }
-            if(_self.oMarquee.scrollTop % _self.iLineHeight === 0) {
-                setTimeout(run, _self.options.pause);
-            } else {
+            if (_self.options.successive) {
                 setTimeout(run, _self.options.speed);
+            } else {
+                if(_self.oMarquee.scrollTop % _self.iLineHeight === 0) {
+                    setTimeout(run, _self.options.pause);
+                } else {
+                    setTimeout(run, _self.options.speed);
+                }
             }
         }
 
@@ -53,7 +58,7 @@
             _self.oMarquee.appendChild(node);
         }
 
-        setTimeout(run, _self.options.pause);
+        run();
     }
 
     return Marquee;
