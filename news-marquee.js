@@ -27,8 +27,8 @@
 
         this.options = {
             successive: false,  //是否连续
-            speed: 10,  //滚动速度
-            pause: 3500 //停顿时间
+            speed: 1000/60,     //滚动速度
+            pause: 3500         //停顿时间
         }
 
         for (var i in opt) {
